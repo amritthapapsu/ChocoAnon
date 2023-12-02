@@ -31,33 +31,33 @@ The intended way to use our completed program is to run provider_terminal.py and
 
 The structure of the database is shown below:
 
-database
+    database
 
-    reports
+        reports
 
-        week_1
+            week_1
 
-            members
+                members
 
-                -member1_week_1.json
+                    -member1_week_1.json
 
-            providers
+                providers
 
-                -provider1_week_1.json
+                    -provider1_week_1.json
 
-            -etf.json
+                -etf.json
 
-        week_2
+            week_2
 
-    service_records
+        service_records
 
-        -week_1.json
+            -week_1.json
 
-    -member_registry.json
+        -member_registry.json
 
-    -provider_directory.json
+        -provider_directory.json
 
-    -provider_registry.json
+        -provider_registry.json
 
 
 As you use the software, you may notice changes occuring in the database folder. 
