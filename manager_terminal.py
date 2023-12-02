@@ -4,14 +4,14 @@ import data
 
 #Displays the user options
 def main_menu():
-    print("1. End of Week")
+    print("\n1. End of Week")
     print("2. Add Members")
     print("3. Update Member")
     print("4. Remove Member")
     print("5. Add Provider")
     print("6. Update Provider")
     print("7. Remove Provider")
-    print("8. Turn Off Terminal")
+    print("8. Turn Off Terminal\n")
 
 
 #Generates the Provider, Member, and ETF reports.
@@ -57,6 +57,7 @@ if __name__ == '__main__':
         try:
             main_menu()
             choice = int(input("Please enter choice: "))
+            print()
 
             if choice == 1:
                 endOfWeek()

@@ -170,10 +170,8 @@ class ProviderControl:
             if member['name'] == memName and member['Id'] == memId:
                 for provider in provInfo:
                     if provider['code'] == serviceCode and provider['fee'] == feePaid:
-                        print(serviceRecordsPath)
                         serviceDate = getJSONListOfDicts(serviceRecordsPath)
                         for data in serviceDate:
-                            print(data['dateOfService'])
                             if data['dateOfService'] == dateOfService:
                                 return True
         return False
