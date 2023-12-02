@@ -28,6 +28,7 @@ The intended way to use our completed program is to run provider_terminal.py and
     
     $ python manager_terminal.py
 
+
 The structure of the database is shown below:
 
 database
