@@ -55,14 +55,17 @@ def createServiceRecord(providerNumber):
     #Gets comment from user.
     memberRecord.comments = memberRecord.getComment()
 
-    #Adds service to database.
-    pc.ProviderControl().createServiceRecord(
+    #Creates service record data object.
+    serviceRecord = pc.ProviderControl().createServiceRecord(
             providerNumber,
             memberRecord.memberNumber, 
             memberRecord.serviceCode,
             memberRecord.dateOfService,
             memberRecord.comments)
-    
+    if (type(serviceRecord) != dict):
+        print(serviceRecord)
+        return
+
     #Asks the user to verify service fee.
     serviceFee = 0
     while(pc.ProviderControl().verifyServiceFee(serviceFee, memberRecord.serviceCode) == False):
@@ -72,13 +75,10 @@ def createServiceRecord(providerNumber):
         except ValueError:
             serviceFee = 0
 
-    #
-    #
-    #
-    #NEED A FUNCTION THAT VERIFIES MEMBER RECORD AND FEE
-    #
-    #
-    #
+    
+
+    #Adds service record to disk.
+    pc.ProviderControl().appendServiceRecord(serviceRecord)
 
 
 #Placeholder for provider.py function
@@ -99,6 +99,7 @@ if __name__ == '__main__':
         try:
             main_menu()
             choice = int(input("Please enter choice: "))
+            print()
 
             if choice == 1:
                 createServiceRecord(providerNumber)
