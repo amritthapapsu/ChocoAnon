@@ -30,7 +30,8 @@ def createServiceRecord(providerNumber):
     print("Validated")
 
     #Gets date of service from user.
-    memberRecord.time = memberRecord.getDateOfService()
+    memberRecord.dateOfService = memberRecord.getDateOfService()
+
 
     #Gets the service code from the user, then verifies its validity.
     memberRecord.serviceCode = memberRecord.getServiceCode()
@@ -55,30 +56,53 @@ def createServiceRecord(providerNumber):
     #Gets comment from user.
     memberRecord.comments = memberRecord.getComment()
 
-    #Adds service to database.
-    pc.ProviderControl().createServiceRecord(
+    #Creates service record data object.
+    serviceRecord = pc.ProviderControl().createServiceRecord(
             providerNumber,
             memberRecord.memberNumber, 
             memberRecord.serviceCode,
             memberRecord.dateOfService,
             memberRecord.comments)
-    
-    #Asks the user to verify service fee.
-    serviceFee = 0
-    while(pc.ProviderControl().verifyServiceFee(serviceFee, memberRecord.serviceCode) == False):
-        try:
-            print(f"Fee for the service is: {pc.ProviderControl().getServiceFee(memberRecord.serviceCode)}")
-            serviceFee = int(input("Verify the service fee: "))
-        except ValueError:
-            serviceFee = 0
+    if (type(serviceRecord) != dict):
+        print(serviceRecord)
+        return
 
-    #
-    #
-    #
-    #NEED A FUNCTION THAT VERIFIES MEMBER RECORD AND FEE
-    #
-    #
-    #
+    #Adds service record to disk.
+    pc.ProviderControl().appendServiceRecord(serviceRecord)
+    print("Written into database.")
+
+    #Prints fee for verification.
+    print(f"\nFee for the service is: {pc.ProviderControl().getServiceFee(memberRecord.serviceCode)}")
+
+    #Verification of above entered information.
+    verifyRecord = data.ServiceData()
+    verifyRecord.dateOfService = '1-1-1000'
+    verifyName = ''
+    verifyFee = -1
+    while (pc.ProviderControl().verifyService(
+        verifyRecord.dateOfService, 
+        verifyName, 
+        verifyRecord.memberNumber, 
+        verifyRecord.serviceCode, 
+        verifyFee) != True):
+
+        print("\nFor verification, please re-enter information when prompted.")
+        verifyRecord.dateOfService = '1-1-1000'
+        verifyName = ''
+        verifyFee = -1
+
+        try:
+            verifyRecord.dateOfService = verifyRecord.getDateOfService()
+            verifyName = data.BasicData().getName()
+            verifyRecord.memberNumber = verifyRecord.getMemberNumber()
+            verifyRecord.serviceCode = verifyRecord.getServiceCode()
+            verifyFee = int(input("Enter the service fee: "))
+
+        except ValueError:
+            verifyRecord.dateOfService = '1-1-1000'
+            verifyName = ''
+            verifyFee = -1
+            print("Invalid.")
 
 
 #Placeholder for provider.py function
@@ -99,6 +123,7 @@ if __name__ == '__main__':
         try:
             main_menu()
             choice = int(input("Please enter choice: "))
+            print()
 
             if choice == 1:
                 createServiceRecord(providerNumber)
@@ -107,9 +132,9 @@ if __name__ == '__main__':
             elif choice == 3:
                 pass
             else:
-                print("Invalid Choice.")
+                print("Invalid.")
 
         except ValueError:
-            print("Invalid Choice.")
+            print("Invalid.")
 
     print("Logging out.")

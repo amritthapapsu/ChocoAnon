@@ -11,7 +11,7 @@ class BasicData:
         self.zipcode = zipcode
 
     def getName(self):
-        name = input("Please enter your name(less than 25 characters): ")
+        name = input("Please enter name(less than 25 characters): ")
         while True:
             if len(name) > 25:
                 print("Name more than 25 characters. Try Again")
@@ -19,7 +19,7 @@ class BasicData:
                 return name
 
     def getCity(self):
-        city = input("Please enter your city(less than 14 characters): ")
+        city = input("Please enter city(less than 14 characters): ")
         while True:
             if len(city) > 14:
                 print("city more than 14 characters. Try Again")
@@ -35,7 +35,7 @@ class BasicData:
                 return state
 
     def getAddress(self):
-        address = input("Please enter your address(less than 25 characters): ")
+        address = input("Please enter address(less than 25 characters): ")
         while True:
             if len(address) > 25:
                 print("address more than 25 characters. Try Again")
@@ -44,7 +44,7 @@ class BasicData:
 
     def getId(self):
         while True:
-            Id = input("Enter your 9 digit id: ")
+            Id = input("Enter 9 digit id: ")
             if not Id.isdigit():
                 print("The id should only contain numbers")
             elif len(Id) != 9:
@@ -88,7 +88,7 @@ class ServiceData:
             if dateOfService > datetime.now():
                 print("The date entered is in the future. Please enter a valid date")
             else:
-                return dateOfService.strftime('%d-%m-%Y')
+                return dateOfService.strftime('%m-%d-%Y')
 
     def getDateAndTime(self):
         dateNTime = datetime.now()
@@ -120,7 +120,7 @@ class ServiceData:
             if not serviceCode.isdigit():
                 print("The service code should only contain numbers")
             elif len(serviceCode) != 6:
-                print("The service code must have exaclty 9 numbers")
+                print("The service code must have exaclty 6 numbers")
             else:
                 return int(serviceCode)
 
