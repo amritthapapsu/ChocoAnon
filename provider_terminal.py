@@ -24,7 +24,7 @@ def createServiceRecord(providerNumber):
     #Checks if the member is valid
     memberRecord.memberNumber = memberRecord.getMemberNumber()
     memberStatus = pc.ProviderControl().messageMemberId(memberRecord.memberNumber)
-    if (memberStatus != "Valid"):
+    if (memberStatus != "Active"):
         print(memberStatus)
         return
     print("Validated")
@@ -65,20 +65,12 @@ def createServiceRecord(providerNumber):
     if (type(serviceRecord) != dict):
         print(serviceRecord)
         return
-
-    #Asks the user to verify service fee.
-    serviceFee = 0
-    while(pc.ProviderControl().verifyServiceFee(serviceFee, memberRecord.serviceCode) == False):
-        try:
-            print(f"Fee for the service is: {pc.ProviderControl().getServiceFee(memberRecord.serviceCode)}")
-            serviceFee = int(input("Verify the service fee: "))
-        except ValueError:
-            serviceFee = 0
-
     
+    '''Verification will go here!'''
 
     #Adds service record to disk.
     pc.ProviderControl().appendServiceRecord(serviceRecord)
+    print("Service Recorded")
 
 
 #Placeholder for provider.py function

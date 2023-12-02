@@ -5,38 +5,18 @@ import data
 #Displays the user options
 def main_menu():
     print("1. End of Week")
-    print("2. Generate ETF Report")
-    print("3. Generate Member Reports")
-    print("4. Generate Provider Reports")
-    print("5. Add Members")
-    print("6. Update Member")
-    print("7. Remove Member")
-    print("8. Add Provider")
-    print("9. Update Provider")
-    print("10. Remove Provider")
-    print("11. Turn Off Terminal")
+    print("2. Add Members")
+    print("3. Update Member")
+    print("4. Remove Member")
+    print("5. Add Provider")
+    print("6. Update Provider")
+    print("7. Remove Provider")
+    print("8. Turn Off Terminal")
 
 
-#Calls the following three functions.
+#Generates the Provider, Member, and ETF reports.
 def endOfWeek():
-    etfReport()
-    memberReport()
-    providerReport()
-
-
-#Placeholder for manager.py function
-def etfReport():
-    pass
-
-
-#Takes in a member id. Calls manager.py function
-def memberReport():
-    print(mc.ManagerControl().viewMemberReport(data.BasicData().getId()))
-
-
-#Takes in a provider id. Calls manager.py function
-def providerReport():
-    print(mc.ManagerControl().viewProviderReport(data.BasicData().getId()))
+    mc.ManagerControl().createReport()
 
 
 #Takes in a member's data, such as name, address, city, etc. Then passes to manager.py.
@@ -73,7 +53,7 @@ def removeProvider():
 
 if __name__ == '__main__':
     choice = 1
-    while choice != 11:
+    while choice != 8:
         try:
             main_menu()
             choice = int(input("Please enter choice: "))
@@ -81,24 +61,18 @@ if __name__ == '__main__':
             if choice == 1:
                 endOfWeek()
             elif choice == 2:
-                etfReport()
-            elif choice == 3:
-                memberReport()
-            elif choice == 4:
-                providerReport()
-            elif choice == 5:
                 addMember()
-            elif choice == 6:
+            elif choice == 3:
                 updateMember()
-            elif choice == 7:
+            elif choice == 4:
                 removeMember()
-            elif choice == 8:
+            elif choice == 5:
                 addProvider()
-            elif choice == 9:
+            elif choice == 6:
                 updateProvider()
-            elif choice == 10:
+            elif choice == 7:
                 removeProvider()
-            elif choice == 11:
+            elif choice == 8:
                 pass
             else:
                 print("Invalid Choice.")
