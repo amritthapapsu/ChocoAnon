@@ -24,7 +24,7 @@ def createServiceRecord(providerNumber):
     #Checks if the member is valid
     memberRecord.memberNumber = memberRecord.getMemberNumber()
     memberStatus = pc.ProviderControl().messageMemberId(memberRecord.memberNumber)
-    if (memberStatus != "Active"):
+    if (memberStatus != "Valid"):
         print(memberStatus)
         return
     print("Validated")
